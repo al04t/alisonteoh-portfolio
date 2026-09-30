@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio of Alison Teoh (Teoh Yi Huan), MEng Electronics and Electrical Engineering student at The University of Edinburgh, visiting student at USC.">
+<title>Alison Teoh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #F5F6F4;
+    --surface: #FFFFFF;
+    --tile: #EBEEEA;
+    --ink: #161D1A;
+    --muted: #5A6661;
+    --line: #D3DAD5;
+    --accent: #0E7A6B;
+    --accent-ink: #FFFFFF;
+    --pad: #A26F10;
+    --todo-bg: #FFF1CC;
+    --todo-ink: #6B4A00;
+    /* "stage" sections stay dark in both themes, like a product hero */
+    --stage: #0A0F0D;
+    --stage-2: #121A17;
+    --stage-ink: #EEF3F0;
+    --stage-muted: #8C9C96;
+    --stage-line: #24302C;
+    --stage-accent: #45C8B0;
+    --stage-pad: #E6B24C;
+    --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --wrap: 72rem;
+    --nav-h: 3rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0F1412; --surface: #171E1B; --tile: #1B2420; --ink: #E6ECE9; --muted: #98A6A0;
+      --line: #2A3531; --accent: #45C8B0; --accent-ink: #04201A; --pad: #E6B24C;
+      --todo-bg: #33290F; --todo-ink: #F3D68E;
+      --stage: #050807; --stage-2: #0D1311;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0F1412; --surface: #171E1B; --tile: #1B2420; --ink: #E6ECE9; --muted: #98A6A0;
+    --line: #2A3531; --accent: #45C8B0; --accent-ink: #04201A; --pad: #E6B24C;
+    --todo-bg: #33290F; --todo-ink: #F3D68E;
+    --stage: #050807; --stage-2: #0D1311;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    background: var(--ground); color: var(--ink);
+    font-family: var(--body); font-size: 1rem; line-height: 1.6;
+    padding-inline: 16px; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--wrap); margin-inline: auto; }
+  .bleed { margin-inline: -16px; padding-inline: 16px; }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.08; text-wrap: balance; margin: 0; letter-spacing: -0.02em; }
+  p { margin: 0; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .mono { font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.02em; }
+  .eyebrow { font-family: var(--mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+  .todo { background: var(--todo-bg); color: var(--todo-ink); border-radius: 3px; padding: 0 0.3em; font-style: italic; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .more-link { font-weight: 500; text-decoration: none; }
+  .more-link::after { content: " ›"; }
+  .more-link:hover { text-decoration: underline; }
+
+  /* reveal on scroll: elements always start visible; only drift in where supported */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .rise { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; }
+      @keyframes rise { from { transform: translateY(40px) scale(0.97); opacity: 0.55; } to { transform: none; opacity: 1; } }
+    }
+  }
+
+  /* nav */
+  header.nav {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+    background: color-mix(in srgb, var(--stage) 78%, transparent);
+    backdrop-filter: saturate(160%) blur(14px); -webkit-backdrop-filter: saturate(160%) blur(14px);
+    color: var(--stage-ink);
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: var(--nav-h); flex-wrap: wrap; }
+  .nav .name { font-family: var(--display); font-weight: 700; color: var(--stage-ink); text-decoration: none; }
+  .nav ul { display: flex; gap: 1.4rem; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
+  .nav ul a { color: var(--stage-muted); text-decoration: none; font-size: 0.82rem; }
+  .nav ul a:hover, .nav ul a[aria-current="true"] { color: var(--stage-ink); }
+
+  /* stage sections */
+  .stage { background: var(--stage); color: var(--stage-ink); }
+  .stage .eyebrow { color: var(--stage-muted); }
+  .stage a { color: var(--stage-accent); }
+
+  /* hero */
+  .hero { text-align: center; padding-block: clamp(4rem, 10vw, 7.5rem) 0; position: relative; overflow: hidden; }
+  .hero h1 { font-size: clamp(3.25rem, 11vw, 8rem); font-weight: 800; letter-spacing: -0.04em; }
+  .hero .alt { display: block; font-family: var(--body); font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 400; letter-spacing: 0; color: var(--stage-muted); margin-top: 0.9rem; }
+  .hero .tagline { font-family: var(--display); font-size: clamp(1.4rem, 3.4vw, 2.4rem); font-weight: 500; margin-top: 1.5rem; letter-spacing: -0.01em; }
+  .hero .tagline em { font-style: normal; color: var(--stage-accent); }
+  .hero .sub { color: var(--stage-muted); max-width: 38rem; margin: 1rem auto 0; font-size: 1.05rem; }
+  .hero .ctas { display: flex; gap: 1.75rem; justify-content: center; margin-top: 1.75rem; flex-wrap: wrap; font-size: 1.1rem; }
+  .hero .facts { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 2.25rem; }
+  .hero .facts span { font-family: var(--mono); font-size: 0.8rem; color: var(--stage-muted); }
+  #scope { display: block; width: 100%; height: clamp(140px, 22vw, 240px); margin-top: 2.5rem; cursor: crosshair; }
+  .hero .hint { font-family: var(--mono); font-size: 0.72rem; color: var(--stage-muted); padding-bottom: 1.5rem; }
+
+  /* sweep (scroll-scrubbed) */
+  #sweep { position: relative; height: 340vh; }
+  .sweep-pin { position: sticky; top: calc(var(--nav-h) + env(safe-area-inset-top, 0px)); height: calc(100svh - var(--nav-h)); display: grid; align-content: center; padding-block: 1.5rem; }
+  .sweep-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
+  .sweep-copy h2 { font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 800; }
+  .readout { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 0.25rem clamp(1rem, 2.5vw, 2rem); margin-top: 1.75rem; }
+  .readout .v { white-space: nowrap; font-family: var(--display); font-weight: 700; font-size: clamp(1.6rem, 3.2vw, 2.5rem); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; line-height: 1.1; }
+  .readout .k { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .steps { list-style: none; margin: 1.75rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
+  .steps li { color: var(--muted); transition: color .3s; padding-left: 1rem; position: relative; }
+  .steps li::before { content: ""; position: absolute; left: 0; top: 0.65em; width: 6px; height: 6px; border-radius: 50%; background: var(--line); transition: background .3s; }
+  .steps li.on { color: var(--ink); }
+  .steps li.on::before { background: var(--accent); }
+  .steps b { font-weight: 600; }
+  .sweep-vis { display: grid; gap: 0.75rem; }
+  .plot { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 1rem 1rem 0.5rem; }
+  .plot svg, .plot canvas { display: block; width: 100%; }
+  .plot canvas { height: 110px; }
+  #bode .grid line { stroke: var(--line); }
+  #bode .axis text { fill: var(--muted); font-family: var(--mono); font-size: 11px; }
+  #bode .trace { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+  #bode .cut line { stroke: var(--pad); stroke-dasharray: 4 4; }
+  #bode .cut text { fill: var(--pad); font-family: var(--mono); font-size: 11px; }
+  #bode .probe line { stroke: var(--ink); stroke-opacity: 0.35; }
+  #bode .probe circle { fill: var(--accent); stroke: var(--surface); stroke-width: 3; }
+  .wave-legend { display: flex; gap: 1.25rem; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); padding: 0 0.25rem 0.4rem; }
+  .wave-legend i { display: inline-block; width: 14px; height: 2px; vertical-align: middle; margin-right: 0.4rem; }
+  .slider-row { display: flex; align-items: center; gap: 0.75rem; font-family: var(--mono); font-size: 0.75rem; color: var(--muted); }
+  .slider-row input { flex: 1; accent-color: var(--accent); }
+  .sweep-note { font-size: 0.85rem; color: var(--muted); }
+
+  /* sections */
+  section.block { padding-block: clamp(4rem, 8vw, 6.5rem); scroll-margin-top: var(--nav-h); }
+  .head { display: flex; align-items: end; justify-content: space-between; gap: 1rem 2rem; flex-wrap: wrap; margin-bottom: 2.25rem; }
+  .head h2 { font-size: clamp(2.2rem, 5vw, 3.75rem); font-weight: 800; }
+  .head p { color: var(--muted); max-width: 32rem; }
+  .stage .head p { color: var(--stage-muted); }
+
+  /* experience */
+  .exp { display: grid; }
+  .job { display: grid; grid-template-columns: 13rem minmax(0, 1fr); gap: 0.5rem 2.5rem; padding-block: 1.75rem; border-top: 1px solid var(--line); }
+  .job .when { display: grid; align-content: start; gap: 0.2rem; font-family: var(--mono); font-size: 0.82rem; font-variant-numeric: tabular-nums; }
+  .job .where { color: var(--muted); font-size: 0.75rem; }
+  .job h3 { font-size: clamp(1.25rem, 2.4vw, 1.6rem); font-weight: 700; }
+  .job h3 span { color: var(--muted); font-weight: 500; }
+  .job .what > ul:not(.tags) { margin: 0.75rem 0 0.9rem; padding-left: 1.1rem; display: grid; gap: 0.45rem; max-width: 46rem; }
+  .job li::marker { color: var(--accent); }
+  @media (max-width: 700px) { .job { grid-template-columns: 1fr; } .job .when { grid-auto-flow: column; justify-content: start; gap: 1rem; } }
+
+  /* carousel */
+  .chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .chip { font: 500 0.82rem var(--body); padding: 0.45rem 0.95rem; border-radius: 999px; border: 0; background: var(--tile); color: var(--ink); cursor: pointer; }
+  .chip[aria-pressed="true"] { background: var(--ink); color: var(--ground); }
+  .rail { display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; padding-block: 0.5rem 1.5rem; scrollbar-width: none; }
+  .rail::-webkit-scrollbar { display: none; }
+  .card { flex: 0 0 clamp(16.5rem, 30vw, 23rem); scroll-snap-align: start; background: var(--surface); border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 30px rgb(0 0 0 / 0.06); }
+  .card .vis { aspect-ratio: 4 / 3; max-width: 100%; display: grid; place-items: end start; padding: 1.1rem 1.25rem; position: relative; color: #F1F5F3; }
+  .card .vis .ph { position: absolute; top: 0.9rem; right: 1rem; font-family: var(--mono); font-size: 0.65rem; opacity: 0.75; text-align: right; max-width: 60%; }
+  .card .vis .big { font-family: var(--display); font-weight: 800; font-size: 2.1rem; line-height: 1; letter-spacing: -0.03em; }
+  .v-teal { background: radial-gradient(120% 90% at 20% 110%, #1FA38E 0%, #0B3D36 60%, #07211D 100%); }
+  .v-gold { background: radial-gradient(120% 90% at 80% 110%, #D69A2D 0%, #5A3B0B 65%, #2A1C06 100%); }
+  .v-slate { background: radial-gradient(120% 90% at 30% 0%, #4E6A8A 0%, #1B2636 70%); }
+  .v-sky { background: linear-gradient(180deg, #6FA9D6 0%, #2D5E86 60%, #173650 100%); }
+  .v-ink { background: radial-gradient(110% 90% at 70% 100%, #3E4A45 0%, #151C19 70%); }
+  .card .txt { padding: 1.25rem 1.35rem 1.35rem; display: grid; gap: 0.5rem; flex: 1; align-content: start; }
+  .card .ctx { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+  .card h3 { font-size: 1.35rem; font-weight: 700; }
+  .card p { color: var(--muted); font-size: 0.95rem; }
+  .card .award { font-family: var(--mono); font-size: 0.72rem; color: var(--pad); }
+  .card .open { margin-top: auto; justify-self: end; width: 2.25rem; height: 2.25rem; border-radius: 50%; border: 0; background: var(--ink); color: var(--ground); font-size: 1.35rem; line-height: 1; cursor: pointer; display: grid; place-items: center; transition: transform .2s; }
+  .card .open:hover { transform: scale(1.08); }
+  .rail-ctl { display: flex; justify-content: end; gap: 0.6rem; }
+  .rail-ctl button { width: 2.5rem; height: 2.5rem; border-radius: 50%; border: 0; background: var(--tile); color: var(--ink); font-size: 1.1rem; cursor: pointer; }
+  .rail-ctl button:disabled { opacity: 0.35; cursor: default; }
+
+  dialog.detail { border: 0; padding: 0; border-radius: 28px; width: min(44rem, calc(100vw - 32px)); max-height: calc(100svh - 48px); background: var(--surface); color: var(--ink); box-shadow: 0 30px 90px rgb(0 0 0 / 0.35); }
+  dialog.detail::backdrop { background: rgb(5 8 7 / 0.55); backdrop-filter: blur(6px); }
+  @media (prefers-reduced-motion: no-preference) {
+    dialog.detail[open] { animation: pop .35s cubic-bezier(.2,.8,.2,1); }
+    @keyframes pop { from { transform: translateY(24px) scale(.97); opacity: 0; } }
+  }
+  .detail .vis { aspect-ratio: 16 / 7; max-width: 100%; }
+  .detail .in { padding: 1.75rem clamp(1.25rem, 4vw, 2.25rem) 2rem; display: grid; gap: 0.9rem; }
+  .detail h3 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; }
+  .detail p { color: var(--ink); }
+  .detail .role b { font-weight: 600; }
+  .detail .x { position: absolute; top: 0.9rem; right: 0.9rem; width: 2.25rem; height: 2.25rem; border-radius: 50%; border: 0; background: rgb(0 0 0 / 0.45); color: #fff; font-size: 1.1rem; cursor: pointer; z-index: 2; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 0; }
+  .tags li { font-family: var(--mono); font-size: 0.72rem; background: var(--tile); border-radius: 999px; padding: 0.2rem 0.65rem; color: var(--muted); }
+  .links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+
+  .accio { margin-top: 2.5rem; background: var(--tile); border-radius: 24px; padding: clamp(1.25rem, 3vw, 2rem); }
+  .accio h3 { font-size: 1.3rem; font-weight: 700; }
+  .accio > p { color: var(--muted); margin-top: 0.4rem; max-width: 44rem; }
+  .accio ul { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: 0.85rem; }
+  .accio li { display: grid; grid-template-columns: 3.5rem 1fr 15rem; gap: 1rem; align-items: baseline; }
+  .accio .yr { font-family: var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+  .accio li a { color: var(--ink); font-weight: 600; }
+  .accio .what { color: var(--muted); }
+  .accio .res { font-family: var(--mono); font-size: 0.75rem; color: var(--pad); }
+
+  /* bayes demo */
+  #bayes { overflow: hidden; }
+  .demo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+  .demo-copy p { color: var(--stage-muted); margin-top: 1rem; max-width: 30rem; }
+  .demo-copy .finding { margin-top: 1.5rem; padding: 1rem 1.2rem; border-radius: 16px; background: var(--stage-2); color: var(--stage-ink); font-size: 0.95rem; }
+  .panel { background: var(--stage-2); border-radius: 24px; padding: clamp(1.1rem, 3vw, 1.75rem); display: grid; gap: 1.25rem; }
+  .bars { display: grid; gap: 0.85rem; }
+  .bar { display: grid; grid-template-columns: 5.5rem 1fr 3.5rem; gap: 0.75rem; align-items: center; }
+  .bar .nm { font-size: 0.9rem; }
+  .bar .nm small { display: block; font-family: var(--mono); font-size: 0.68rem; color: var(--stage-muted); }
+  .bar .track { display: block; height: 12px; border-radius: 999px; background: var(--stage-line); overflow: hidden; }
+  .bar .fill { display: block; height: 100%; border-radius: inherit; transition: width .35s cubic-bezier(.2,.8,.2,1); }
+  .bar .pct { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+  #fillA { background: #8FA6B8; }
+  #fillB { background: var(--stage-pad); }
+  #hist { display: block; width: 100%; height: 120px; }
+  .flips { display: flex; flex-wrap: wrap; gap: 4px; min-height: 26px; }
+  .flips span { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-size: 0.66rem; font-weight: 500; }
+  .flips .H { background: var(--stage-ink); color: var(--stage); }
+  .flips .T { background: transparent; color: var(--stage-ink); box-shadow: inset 0 0 0 1.5px var(--stage-muted); }
+  .status-line { font-size: 0.95rem; min-height: 1.6em; }
+  .status-line b { color: var(--stage-accent); font-weight: 600; }
+  .ctrls { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+  .pill { font: 500 0.9rem var(--body); border: 0; border-radius: 999px; padding: 0.55rem 1.15rem; cursor: pointer; background: var(--stage-line); color: var(--stage-ink); }
+  .pill.primary { background: var(--stage-accent); color: #04201A; }
+  .bias-row { display: flex; align-items: center; gap: 0.75rem; font-family: var(--mono); font-size: 0.75rem; color: var(--stage-muted); flex-wrap: wrap; }
+  .bias-row input { flex: 1; min-width: 8rem; accent-color: var(--stage-pad); }
+
+  /* coursework bento */
+  .bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1rem; }
+  .tile { background: var(--surface); border-radius: 24px; padding: clamp(1.25rem, 2.5vw, 1.75rem); display: grid; gap: 0.6rem; align-content: start; }
+  .tile.w3 { grid-column: span 3; } .tile.w2 { grid-column: span 2; } .tile.w4 { grid-column: span 4; }
+  .tile h3 { font-size: 1.3rem; font-weight: 700; }
+  .tile p { color: var(--muted); font-size: 0.95rem; }
+  .tile .score { font-family: var(--display); font-weight: 800; font-size: clamp(3rem, 7vw, 4.5rem); line-height: 0.95; letter-spacing: -0.04em; color: var(--accent); }
+  .tile .score small { font-size: 0.4em; color: var(--muted); letter-spacing: 0; }
+  .modules { margin-top: 2.5rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 2.5rem; }
+  .modules h3 { font-size: 1rem; font-family: var(--mono); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .modules ul { list-style: none; margin: 0.8rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .modules li { background: var(--tile); border-radius: 999px; padding: 0.35rem 0.9rem; font-size: 0.9rem; }
+  .modules li b { font-family: var(--mono); font-weight: 500; font-size: 0.78rem; margin-right: 0.3rem; color: var(--muted); }
+
+  /* journey */
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid; max-width: 52rem; }
+  .timeline li { display: grid; grid-template-columns: 7rem 1fr; gap: 1.5rem; padding-block: 1.1rem; border-top: 1px solid var(--stage-line); }
+  .timeline .yr { font-family: var(--display); font-weight: 700; font-size: 1.6rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .timeline b { font-weight: 600; }
+  .timeline span.d { display: block; color: var(--stage-muted); font-size: 0.95rem; }
+
+  /* skills + beyond */
+  .skills { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; }
+  .skills > div { background: var(--surface); border-radius: 20px; padding: 1.25rem 1.35rem; }
+  .skills h3 { font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 500; margin-bottom: 0.75rem; }
+  .skills ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; }
+  .skills .k { display: block; font-family: var(--mono); font-size: 0.7rem; color: var(--muted); line-height: 1.3; }
+  .beyond { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
+  .beyond article { background: var(--tile); border-radius: 24px; padding: clamp(1.25rem, 3vw, 2rem); display: grid; gap: 0.5rem; align-content: start; }
+  .beyond h3 { font-size: 1.4rem; }
+  .beyond .music { grid-column: 1 / -1; gap: 0.9rem; }
+  .music .stats { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; margin-top: 0.4rem; }
+  .music .stats div { display: grid; }
+  .music .n { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 5vw, 3rem); line-height: 1; letter-spacing: -0.03em; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .music .l { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); max-width: 12rem; }
+  .scores { list-style: none; margin: 0.4rem 0 0; padding: 0; display: grid; }
+  .scores li { display: grid; grid-template-columns: 13rem 1fr auto; gap: 0.25rem 1.25rem; align-items: baseline; padding-block: 0.6rem; border-top: 1px solid var(--line); }
+  .scores b { font-weight: 600; }
+  .scores span { color: var(--muted); font-size: 0.92rem; }
+  .scores em { font-style: normal; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  @media (max-width: 640px) { .scores li { grid-template-columns: 1fr auto; } .scores span { grid-column: 1 / -1; grid-row: 2; } }
+  .beyond p { color: var(--muted); }
+
+  /* contact */
+  .contact { text-align: center; padding-block: clamp(4.5rem, 9vw, 7rem); }
+  .contact h2 { font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 800; }
+  .contact .sub { color: var(--stage-muted); margin-top: 1rem; }
+  .contact ul { list-style: none; padding: 0; margin: 2rem auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+  .contact li a, .contact li span.btnish { display: inline-block; padding: 0.6rem 1.2rem; border-radius: 999px; background: var(--stage-2); color: var(--stage-ink); text-decoration: none; font-size: 0.95rem; }
+  footer { padding-block: 1.5rem 2.5rem; color: var(--stage-muted); font-size: 0.8rem; text-align: center; }
+
+  @media (max-width: 900px) {
+    #sweep { height: auto; }
+    .sweep-pin { position: static; height: auto; padding-block: 4rem; }
+    .sweep-grid, .demo { grid-template-columns: 1fr; }
+    .bento { grid-template-columns: 1fr 1fr; }
+    .tile.w3, .tile.w2, .tile.w4 { grid-column: span 2; }
+    .skills { grid-template-columns: 1fr 1fr; }
+    .accio li { grid-template-columns: 3rem 1fr; }
+    .accio .res { grid-column: 2; }
+  }
+  @media (max-width: 560px) {
+    .nav ul { gap: 0.9rem; }
+    .readout { gap: 0.25rem 1.25rem; }
+    .modules, .beyond, .skills { grid-template-columns: 1fr; }
+    .timeline li { grid-template-columns: 4.5rem 1fr; gap: 1rem; }
+    .timeline .yr { font-size: 1.25rem; }
+    .bar { grid-template-columns: 4.5rem 1fr 3rem; }
+  }
+</style>
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+
+<header class="nav bleed">
+  <div class="wrap">
+    <a class="name" href="#top">Alison Teoh</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#bayes">Try it</a></li>
+        <li><a href="#coursework">Coursework</a></li>
+        <li><a href="#journey">Journey</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="stage bleed" id="top">
+  <div class="hero wrap">
+    <p class="eyebrow">Electronics &amp; Electrical Engineering · Edinburgh → USC</p>
+    <h1 style="margin-top:1rem">Alison Teoh<span class="alt">Teoh Yi Huan</span></h1>
+    <p class="tagline">Circuits, the code on them, <em>and the data in between.</em></p>
+    <p class="sub">From hardware to software, from math notations to musical notes. All in one.</p>
+    <div class="ctas"><a class="more-link" href="#work">See the work</a><a class="more-link" href="#contact">Get in touch</a></div>
+    <div class="facts">
+      <span>MEng, The University of Edinburgh</span>
+      <span>Visiting student, ECE, USC Viterbi 2026–27</span>
+      <span>PETRONAS scholar</span>
+      <span class="todo">Looking for: e.g. summer 2027 internships</span>
+    </div>
+    <canvas id="scope" aria-label="Animated signal trace. Move your pointer across it to change the frequency." role="img"></canvas>
+    <p class="hint">Move across the trace to change the frequency</p>
+  </div>
+</div>
+
+<section id="sweep" aria-labelledby="sweep-h">
+  <div class="sweep-pin wrap">
+    <div class="sweep-grid">
+      <div class="sweep-copy">
+        <p class="eyebrow">Lab coursework · Analogue design</p>
+        <h2 id="sweep-h" style="margin-top:0.6rem">Scroll to sweep my filter.</h2>
+        <div class="readout" aria-live="polite">
+          <span class="k">Frequency</span><span class="k">Gain</span><span class="k">Phase</span>
+          <span class="v" id="rf">10 Hz</span><span class="v" id="rg">+6.0 dB</span><span class="v" id="rp">−1°</span>
+        </div>
+        <ol class="steps">
+          <li data-s="0"><b>Passband.</b> A Sallen-Key stage on an LM358 gives a flat gain of 2 (+6 dB).</li>
+          <li data-s="1"><b>Cutoff.</b> Designed for exactly −3 dB from the passband at 1 kHz.</li>
+          <li data-s="2"><b>Stopband.</b> Three poles roll off at −60 dB per decade.</li>
+        </ol>
+      </div>
+      <div class="sweep-vis">
+        <div class="plot">
+          <svg id="bode" viewBox="0 0 440 250" role="img" aria-label="Magnitude response of a third-order Butterworth low-pass filter, 1 kHz cutoff">
+            <g class="grid"></g><g class="axis"></g><path class="trace"></path><g class="cut"></g><g class="probe"><line></line><circle r="6"></circle></g>
+          </svg>
+        </div>
+        <div class="plot">
+          <div class="wave-legend"><span><i style="background:var(--muted)"></i>Input</span><span><i style="background:var(--accent)"></i>Output</span></div>
+          <canvas id="waves" aria-hidden="true"></canvas>
+        </div>
+        <label class="slider-row" for="fslider">10 Hz <input id="fslider" type="range" min="0" max="1000" value="0" aria-label="Frequency"> 10 kHz</label>
+        <p class="sweep-note">Ideal response of the third-order Butterworth low-pass I built on breadboard and a custom PCB, then measured with frequency-response sweeps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="experience" aria-labelledby="exp-h">
+  <div class="wrap">
+    <div class="head rise">
+      <h2 id="exp-h">Experience.</h2>
+      <p>Internships, engineering teams and programmes, most recent first.</p>
+    </div>
+    <div class="exp">
+      <article class="job rise">
+        <div class="when"><span>Jul 2025 – now</span><span class="where">Remote · Singapore / Malaysia</span></div>
+        <div class="what">
+          <h3>Software Engineering Intern <span>· RICE International</span></h3>
+          <ul>
+            <li>Led an end-to-end, 110-hour client engagement for an immigration consultancy: scoped requirements with the CEO, fixed two failing WeChat mini-program features including subscription payments, and wrote the handoff spec for the client's CTO.</li>
+            <li>Delivered 6 custom Workday integrations in 30 days, recovering and migrating legacy data after the standard delivery package failed.</li>
+            <li>Built DigDoc, a retrieval-augmented generation platform that chunks PDFs, retrieves the relevant passages and grounds LLM answers in the source documents.</li>
+          </ul>
+          <ul class="tags"><li>Python</li><li>LangChain</li><li>Workday Studio</li><li>WeChat mini-programs</li></ul>
+        </div>
+      </article>
+      <article class="job rise">
+        <div class="when"><span>Apr 2026</span><span class="where">London</span></div>
+        <div class="what">
+          <h3>First-Year Trading &amp; Technology Program <span>· Jane Street</span></h3>
+          <ul>
+            <li>1 of 75 selected from thousands of applicants across EMEA.</li>
+            <li>Finished top of my trading group in a live simulation, after switching to active trading between rounds to close an early gap.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="job rise">
+        <div class="when"><span>Sept 2025 – May 2026</span><span class="where">University of Edinburgh</span></div>
+        <div class="what">
+          <h3>Electronics &amp; Communications Team <span>· HYPED (Hyperloop Edinburgh)</span></h3>
+          <ul>
+            <li>Chosen as lead designer for a custom sensor-communication PCB within a month of joining, and owned it from schematic capture to manufacture.</li>
+            <li>Designed its I²C, CAN and SPI interfaces to meet sub-1 ms sensor-feedback requirements.</li>
+          </ul>
+          <ul class="tags"><li>Altium</li><li>I²C</li><li>CAN</li><li>SPI</li></ul>
+        </div>
+      </article>
+      <article class="job rise">
+        <div class="when"><span>Sept 2025 – May 2026</span><span class="where">University of Edinburgh</span></div>
+        <div class="what">
+          <h3>Systems Team <span>· Raidō, UoE Aeronautics Society</span></h3>
+          <ul>
+            <li>Designed a central flight-computer PCB integrating GPS, IMU and airspeed sensors with a long-range RF control link.</li>
+            <li>Introduced the team's first formal wiring architecture to cut EMI susceptibility and mechanical-failure risk. Also built an RC foam glider.</li>
+          </ul>
+          <ul class="tags"><li>PCB design</li><li>Sensors</li><li>RF</li><li>Wiring harness</li></ul>
+        </div>
+      </article>
+      <article class="job rise">
+        <div class="when"><span>Dec 2025 – now</span><span class="where">Remote · Malaysia / UK</span></div>
+        <div class="what">
+          <h3>Creative Director <span>· ELECTRO Education</span></h3>
+          <ul>
+            <li>Led content and campaigns that filled an industry visit within 3 weeks and grew Instagram followers by 22% in 90 days.</li>
+            <li>Secured a promotional partnership with UKEC and coordinated the sponsor, host company and student societies.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="job rise">
+        <div class="when"><span>Jun 2024</span><span class="where">Malaysia</span></div>
+        <div class="what">
+          <h3>Technical Intern <span>· Chumbaka</span></h3>
+          <ul>
+            <li>Cut recurring report generation by about 80% with a Python/Pandas pipeline that turns Google Sheets data into presentation-ready PDFs.</li>
+            <li>Mentored 30+ students from first ideas to working Arduino and MIT App Inventor prototypes.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="work" aria-labelledby="work-h">
+  <div class="wrap">
+    <div class="head rise">
+      <h2 id="work-h">Selected work.</h2>
+      <div class="chips" role="group" aria-label="Filter projects">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-filter="hardware" aria-pressed="false">Hardware</button>
+        <button class="chip" type="button" data-filter="software" aria-pressed="false">Software</button>
+        <button class="chip" type="button" data-filter="data" aria-pressed="false">Data</button>
+        <button class="chip" type="button" data-filter="hackathon" aria-pressed="false">Hackathons</button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="rail bleed" id="rail">
+      <article class="card" data-tags="hardware">
+        <div class="vis v-teal"><span class="ph">add PCB render or photo</span><span class="big">HYPED</span></div>
+        <div class="txt">
+          <span class="ctx">Hyperloop Edinburgh · 2025–26</span>
+          <h3>A sensor PCB for a Hyperloop pod.</h3>
+          <p>Lead designer, from schematic to manufacture, with I²C, CAN and SPI for sub-1 ms sensor feedback.</p>
+          <button class="open" type="button" data-open="d-hyped" aria-label="More about the HYPED PCB">+</button>
+        </div>
+      </article>
+      <article class="card" data-tags="hardware">
+        <div class="vis v-sky"><span class="ph">add board or aircraft photo</span><span class="big">Raidō</span></div>
+        <div class="txt">
+          <span class="ctx">UoE Aeronautics Society · 2025–26</span>
+          <h3>A flight computer, on one board.</h3>
+          <p>GPS, IMU and airspeed sensors with a long-range RF link, plus the team's first formal wiring architecture.</p>
+          <button class="open" type="button" data-open="d-raido" aria-label="More about the Raidō flight computer">+</button>
+        </div>
+      </article>
+      <article class="card" data-tags="software data">
+        <div class="vis v-ink"><span class="ph">add screenshot</span><span class="big">DigDoc</span></div>
+        <div class="txt">
+          <span class="ctx">RICE International · 2025–26</span>
+          <h3>Answers grounded in your PDFs.</h3>
+          <p>A retrieval-augmented generation platform that chunks documents and cites what it retrieves.</p>
+          <button class="open" type="button" data-open="d-digdoc" aria-label="More about DigDoc">+</button>
+        </div>
+      </article>
+      <article class="card" data-tags="software data">
+        <div class="vis v-teal"><span class="ph">add Inspector screenshot</span><span class="big">MCP</span></div>
+        <div class="txt">
+          <span class="ctx">Personal project · Sept 2026</span>
+          <h3>Competitor research, as Claude tools.</h3>
+          <p>An MCP server giving Claude four tools to scrape pages, pull SEO metadata, read heading structure and compare competitors.</p>
+          <button class="open" type="button" data-open="d-mcp" aria-label="More about the marketing research MCP server">+</button>
+        </div>
+      </article>
+      <article class="card" data-tags="software data">
+        <div class="vis v-ink"><span class="ph">add /docs screenshot</span><span class="big">RAG API</span></div>
+        <div class="txt">
+          <span class="ctx">Personal project · Sept 2026</span>
+          <h3>Ask your own documents.</h3>
+          <p>A local retrieve-augment-generate service on FastAPI, ChromaDB and Ollama. No API keys, nothing leaves the machine.</p>
+          <button class="open" type="button" data-open="d-rag" aria-label="More about the RAG API">+</button>
+        </div>
+      </article>
+      <article class="card" data-tags="software hackathon">
+        <div class="vis v-slate"><span class="ph">add screenshot</span><span class="big">Oops!</span></div>
+        <div class="txt">
+          <span class="ctx">AdaHack · 2025</span>
+          <h3>Accessibility, highlighted.</h3>
+          <p>A Chrome extension that finds WCAG problems on any page and explains each one in place.</p>
+          <span class="award">1st place · AdaHack 2025</span>
+          <button class="open" type="button" data-open="d-oops" aria-label="More about Oops, There's a Problem">+</button>
+        </div>
+      </article>
+      <article class="card" data-tags="data software hackathon">
+        <div class="vis v-gold"><span class="ph">add heatmap GIF</span><span class="big">Woodchuck</span></div>
+        <div class="txt">
+          <span class="ctx">DurHack X · Nov 2025</span>
+          <h3>500 years of wood, forecast.</h3>
+          <p>An interactive heatmap answering the tongue twister with real wildlife, census and forestry data.</p>
+          <span class="award">Honourable mention · DurHack 2025</span>
+          <button class="open" type="button" data-open="d-woodchuck" aria-label="More about the Woodchuck project">+</button>
+        </div>
+      </article>
+      <article class="card" data-tags="software hackathon">
+        <div class="vis v-teal"><span class="ph">add app screenshots</span><span class="big">Spinector</span></div>
+        <div class="txt">
+          <span class="ctx">ACCIO · 2020–2022</span>
+          <h3>A scoliometer in your pocket.</h3>
+          <p>Measures spinal curvature with a phone, and grew into a doctor–patient app for rural areas.</p>
+          <span class="award">Gold · GirlsCode Hackathon 2022</span>
+          <button class="open" type="button" data-open="d-spinector" aria-label="More about Spinector">+</button>
+        </div>
+      </article>
+      <article class="card" data-tags="data software">
+        <div class="vis v-ink"><span class="big">Bayes</span></div>
+        <div class="txt">
+          <span class="ctx">Personal project · Jul 2026</span>
+          <h3>Fair coin or biased?</h3>
+          <p>Bayes' theorem built from scratch and tested over 200 simulations. You can try it below.</p>
+          <button class="open" type="button" data-open="d-bayes" aria-label="More about the Bayesian coin simulator">+</button>
+        </div>
+      </article>
+    </div>
+    <div class="rail-ctl"><button type="button" id="prev" aria-label="Previous project">‹</button><button type="button" id="next" aria-label="Next project">›</button></div>
+
+    <div class="accio rise">
+      <h3>More from ACCIO, 2019–2022</h3>
+      <p>Spinector was one of seven projects a classmate and I built as ACCIO, starting at 13. We also founded our school's first digital maker club. Every project has a page on the <a href="https://accio2021.github.io/accio/">team site</a>.</p>
+      <ul>
+        <li><span class="yr">2019</span><span><a href="https://accio2021.github.io/accio/accio.html">Accio</a> <span class="what">An automatic stock counter, so nobody has to tag inventory one item at a time.</span></span><span class="res">Gold · YIC 2019, state</span></li>
+        <li><span class="yr">2021</span><span><a href="https://accio2021.github.io/accio/foodie.html">Foodie</a> <span class="what">Simple recipes for people learning to cook during lockdown.</span></span><span class="res">Sarawak Mobile Apps Hackathon 2021</span></li>
+        <li><span class="yr">2021</span><span><a href="https://accio2021.github.io/accio/foogo.html">Foogo</a> <span class="what">An app to give students more free time at recess. <span class="todo">confirm</span></span></span><span class="res">YIC 2021, national</span></li>
+        <li><span class="yr">2022</span><span><a href="https://accio2021.github.io/accio/posco.html">PosCo</a> <span class="what">A posture corrector that tracks your progress so you can see yourself improve.</span></span><span class="res">YIC 2022, national</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<dialog class="detail" id="d-spinector" aria-labelledby="d-spinector-h">
+  <button class="x" type="button" aria-label="Close">✕</button>
+  <div class="vis v-teal"></div>
+  <div class="in">
+    <span class="eyebrow">ACCIO · 2020–2022 · team of 2</span>
+    <h3 id="d-spinector-h">Spinector</h3>
+    <p>A digital scoliometer that measures spinal curvature using a phone's sensors. Version 1 made measurements more accurate and trackable. Version 2 added features for patients in rural areas, and version 3 added two-way communication between doctors and patients.</p>
+    <p class="role"><b>My role:</b> backend developer. <span class="todo">One line on what you built</span></p>
+    <p class="mono" style="color:var(--pad)">Gold · GirlsCode Mobile Apps Hackathon 2022 (state) · Silver · Sarawak Mobile Apps Hackathon 2022 (state) · Silver · Young Innovators Challenge 2020 (national)</p>
+    <ul class="tags"><li>MIT App Inventor</li><li>Phone sensors</li><li>Healthcare</li></ul>
+    <div class="links"><a class="more-link" href="https://accio2021.github.io/accio/spinector3.html">Spinector 3.0</a><a class="more-link" href="https://accio2021.github.io/accio/spinector1.html">Version 1</a></div>
+  </div>
+</dialog>
+
+<dialog class="detail" id="d-woodchuck" aria-labelledby="d-woodchuck-h">
+  <button class="x" type="button" aria-label="Close">✕</button>
+  <div class="vis v-gold"></div>
+  <div class="in">
+    <span class="eyebrow">DurHack X · Nov 2025 · Honourable mention · team of 4</span>
+    <h3 id="d-woodchuck-h">How Much Wood Can a Woodchuck Chuck?</h3>
+    <p>An interactive heatmap with a year slider that forecasts woodchuck "wood-chucking" hotspots across Pennsylvania for 500 years, plus a chuck graph and literal log rain. It's built from GBIF sightings, Pennsylvania Game Commission harvest reports, census population density and USDA wood-density data.</p>
+    <p>With only 2–7 observations per location, time-series models like ARIMA were out. We tried a random forest, then replaced it with an exponential growth projection with stochastic variation, and treated the uncertainty as part of the story.</p>
+    <p class="role"><b>My role:</b> <span class="todo">e.g. data cleaning in Pandas and the Polars projection</span></p>
+    <ul class="tags"><li>Python</li><li>Pandas</li><li>Polars</li><li>JavaScript</li></ul>
+    <div class="links"><a class="more-link" href="https://devpost.com/software/how-much-wood-can-a-woodchuck-chuck">Devpost</a><a class="more-link" href="https://github.com/al04t/EDurHack">Code</a><span class="todo">live demo link</span></div>
+  </div>
+</dialog>
+
+<dialog class="detail" id="d-raido" aria-labelledby="d-raido-h">
+  <button class="x" type="button" aria-label="Close">✕</button>
+  <div class="vis v-sky"></div>
+  <div class="in">
+    <span class="eyebrow">Raidō, UoE Aeronautics Society · Systems Team · 2025–26</span>
+    <h3 id="d-raido-h">Flight Computer PCB</h3>
+    <p>I designed the society's central flight-computer board, bringing GPS, an IMU and airspeed sensing together with a long-range RF control interface.</p>
+    <p>I also introduced the team's first formal wiring architecture to reduce EMI susceptibility and the risk of mechanical failure, debugged and wired electronics on test aircraft, and built an RC foam glider.</p>
+    <p class="role"><span class="todo">Optional: the MCU and radio you chose, and whether it has flown</span></p>
+    <ul class="tags"><li>PCB design</li><li>GPS · IMU · airspeed</li><li>RF control</li><li>Wiring architecture</li></ul>
+    <div class="links"><a class="more-link" href="https://www.instagram.com/raido_aero/">Raidō on Instagram</a></div>
+  </div>
+</dialog>
+
+<dialog class="detail" id="d-hyped" aria-labelledby="d-hyped-h">
+  <button class="x" type="button" aria-label="Close">✕</button>
+  <div class="vis v-teal"></div>
+  <div class="in">
+    <span class="eyebrow">HYPED (Hyperloop Edinburgh) · Electronics &amp; Communications · 2025–26</span>
+    <h3 id="d-hyped-h">Sensor-Communication PCB</h3>
+    <p>Within a month of joining, I was chosen as lead designer for a custom board that carries sensor data around the pod. I owned it from schematic capture through to manufacture.</p>
+    <p>The board's I²C, CAN and SPI interfaces were designed to meet a sub-1 ms sensor-feedback requirement.</p>
+    <ul class="tags"><li>Altium</li><li>I²C</li><li>CAN</li><li>SPI</li><li>Schematic → manufacture</li></ul>
+  </div>
+</dialog>
+
+<dialog class="detail" id="d-digdoc" aria-labelledby="d-digdoc-h">
+  <button class="x" type="button" aria-label="Close">✕</button>
+  <div class="vis v-ink"></div>
+  <div class="in">
+    <span class="eyebrow">RICE International · Software Engineering Intern</span>
+    <h3 id="d-digdoc-h">DigDoc</h3>
+    <p>A retrieval-augmented generation platform. It ingests PDFs and splits them into chunks, retrieves the passages relevant to a question, and grounds the LLM's answer in those source passages.</p>
+    <ul class="tags"><li>Python</li><li>LangChain</li><li>RAG</li><li>LLMs</li></ul>
+  </div>
+</dialog>
+
+<dialog class="detail" id="d-mcp" aria-labelledby="d-mcp-h">
+  <button class="x" type="button" aria-label="Close">✕</button>
+  <div class="vis v-teal"></div>
+  <div class="in">
+    <span class="eyebrow">Personal project · September 2026</span>
+    <h3 id="d-mcp-h">Marketing Research MCP Server</h3>
+    <p>An MCP server that hands Claude a research toolkit: <b>scrape_page</b> returns readable text with navigation and script noise stripped out, <b>extract_meta</b> pulls the title, description, canonical URL and Open Graph tags, <b>analyze_headers</b> maps the H1–H3 hierarchy, and <b>compare_competitors</b> fetches several sites at once with <code>asyncio.gather</code> and returns a comparison table, reporting any site that fails in its own row.</p>
+    <p>It also ships a prompt that chains those tools into a positioning brief, and a resource holding that brief's template. Written against the MCP Python SDK 2.x, whose API differs from the 1.x examples most tutorials still use.</p>
+    <ul class="tags"><li>Python</li><li>MCP</li><li>httpx</li><li>BeautifulSoup</li><li>asyncio</li></ul>
+    <div class="links"><a class="more-link" href="https://github.com/al04t/marketing-mcp">Code</a></div>
+  </div>
+</dialog>
+
+<dialog class="detail" id="d-rag" aria-labelledby="d-rag-h">
+  <button class="x" type="button" aria-label="Close">✕</button>
+  <div class="vis v-ink"></div>
+  <div class="in">
+    <span class="eyebrow">Personal project · September 2026</span>
+    <h3 id="d-rag-h">Local RAG API</h3>
+    <p>A FastAPI service that stores documents and answers questions from them. A question is embedded with <code>nomic-embed-text</code>, ChromaDB returns the closest chunks, and a local LLM answers using only that context. Every answer comes back with the passages it used, so you can check it.</p>
+    <p>Documents are chunked by paragraph and tagged with their owner, so a query can be filtered to one person's profile or search them all. Everything runs locally through Ollama: no API keys, and no data leaving the machine.</p>
+    <ul class="tags"><li>Python</li><li>FastAPI</li><li>ChromaDB</li><li>Ollama</li><li>RAG</li></ul>
+    <div class="links"><a class="more-link" href="https://github.com/al04t/rag-api">Code</a></div>
+  </div>
+</dialog>
+
+<dialog class="detail" id="d-oops" aria-labelledby="d-oops-h">
+  <button class="x" type="button" aria-label="Close">✕</button>
+  <div class="vis v-slate"></div>
+  <div class="in">
+    <span class="eyebrow">AdaHack 2025 · 1st place · Team 18</span>
+    <h3 id="d-oops-h">Oops, There's a Problem!</h3>
+    <p>A Manifest V3 Chrome extension for developers about to launch a site. It checks every visible element against five rules: WCAG AA colour contrast (using relative luminance), missing or too-short alt text, unlabelled form controls, videos without captions, and interactive elements you can't reach with Tab. Each problem gets a red outline and a tooltip, and the toolbar badge counts them.</p>
+    <p class="role"><b>My role:</b> <span class="todo">e.g. wrote the colour-contrast checker</span></p>
+    <ul class="tags"><li>JavaScript</li><li>Chrome Extensions</li><li>WCAG 2.1</li></ul>
+    <div class="links"><a class="more-link" href="https://github.com/9128hotel/AdaHack-2025-Team-18">Code</a></div>
+  </div>
+</dialog>
+
+<dialog class="detail" id="d-bayes" aria-labelledby="d-bayes-h">
+  <button class="x" type="button" aria-label="Close">✕</button>
+  <div class="vis v-ink"></div>
+  <div class="in">
+    <span class="eyebrow">Personal project · Jul 2026</span>
+    <h3 id="d-bayes-h">Bayesian Coin Flip Simulator</h3>
+    <p>Bayes' theorem built from the ground up in Python. A hidden coin, either fair or 60% heads, is flipped repeatedly, and the belief in each coin is updated after every flip. Across 200 simulations of 100 flips, the model picked the right coin 83.5% of the time, but reached 95% confidence in fewer than half the runs. Coins that behave similarly need far more evidence to tell apart.</p>
+    <ul class="tags"><li>Python</li><li>Probability</li><li>Monte Carlo</li><li>Matplotlib</li></ul>
+    <div class="links"><a class="more-link" href="https://github.com/al04t/ML-Portfolio-Tracker">Notebook</a><a class="more-link" href="#bayes" data-close>Try the live version</a></div>
+  </div>
+</dialog>
+
+<section class="block stage bleed" id="bayes" aria-labelledby="bayes-h">
+  <div class="wrap demo">
+    <div class="demo-copy rise">
+      <p class="eyebrow">Try it · Bayesian inference</p>
+      <h2 id="bayes-h" style="font-size:clamp(2.2rem,5vw,3.75rem);font-weight:800;margin-top:0.6rem">Is this coin fair?</h2>
+      <p>One of two coins is hidden: Coin A is fair, and Coin B lands heads more often. Flip it and watch the belief update after every result, the same way my simulator does.</p>
+      <p class="finding">In my 200-run experiment with a 60% coin, the right answer won 83.5% of the time. Push the bias higher and see how much faster the evidence piles up.</p>
+    </div>
+    <div class="panel rise" id="bayes-panel">
+      <div class="bars">
+        <div class="bar"><span class="nm">Coin A<small>50% heads</small></span><span class="track"><span class="fill" id="fillA" style="width:50%"></span></span><span class="pct" id="pA">50%</span></div>
+        <div class="bar"><span class="nm">Coin B<small id="bLabel">60% heads</small></span><span class="track"><span class="fill" id="fillB" style="width:50%"></span></span><span class="pct" id="pB">50%</span></div>
+      </div>
+      <canvas id="hist" aria-label="Belief in Coin B over the flips so far" role="img"></canvas>
+      <div class="flips" id="flips" aria-label="Flip results"></div>
+      <p class="status-line" id="status" aria-live="polite">No flips yet. Both coins are equally likely.</p>
+      <div class="ctrls">
+        <button class="pill primary" type="button" id="flip1">Flip</button>
+        <button class="pill" type="button" id="flip10">Flip 10</button>
+        <button class="pill" type="button" id="reveal">Reveal coin</button>
+        <button class="pill" type="button" id="newcoin">New coin</button>
+      </div>
+      <label class="bias-row" for="bias">Coin B heads rate <input id="bias" type="range" min="55" max="95" step="5" value="60"> <span id="biasV">60%</span></label>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="coursework" aria-labelledby="cw-h">
+  <div class="wrap">
+    <div class="head rise">
+      <h2 id="cw-h">Coursework.</h2>
+      <p>The University of Edinburgh, 2025–26. Reports and code stay private; I'm happy to talk them through.</p>
+    </div>
+    <div class="bento">
+      <article class="tile w4 rise">
+        <span class="eyebrow">Lab project</span>
+        <h3>STM32 Voice Recorder</h3>
+        <p>An end-to-end voice capture system: an electret microphone amplified by an MCP6272 inverting stage to a 1 Vpp target, band-limited for speech and sampled at 8 kHz by an STM32 ADC. I diagnosed and fixed clipping in the capture and verified the gain with frequency-response measurements.</p>
+        <ul class="tags"><li>STM32</li><li>C</li><li>Analogue front-end</li><li>ADC</li></ul>
+      </article>
+      <article class="tile w2 rise">
+        <span class="eyebrow">Sensor Networks &amp; Data Analysis</span>
+        <p class="score">39<small>/40</small></p>
+        <h3>Signal analysis in Python</h3>
+        <p>AM signals, power via Parseval's theorem, modulation efficiency and FFT spectra.</p>
+      </article>
+      <article class="tile w2 rise">
+        <span class="eyebrow">Lab project</span>
+        <h3>Butterworth Filter</h3>
+        <p>The filter you swept above: a Sallen-Key and RC stage on an LM358, built on breadboard and a custom PCB.</p>
+      </article>
+      <article class="tile w2 rise">
+        <span class="eyebrow">Informatics 1: Cognitive Science</span>
+        <h3>Learning the past tense</h3>
+        <p>Replicated Rumelhart &amp; McClelland's perceptron with a course framework, then built my own classifier to compare how fast eight irregular-verb classes are learned.</p>
+      </article>
+      <article class="tile w2 rise">
+        <span class="eyebrow">Informatics 1: Cognitive Science</span>
+        <h3>Hopfield memory</h3>
+        <p>Tested how corrupted inputs are recalled, and found where the network falls into a competing stored memory.</p>
+      </article>
+    </div>
+    <div class="modules rise">
+      <div>
+        <h3>Now at USC · Fall 2026</h3>
+        <ul>
+          <li><b>EE 370</b>Electromagnetics for Engineering Systems</li>
+          <li><b>EE 354</b>Digital Circuits</li>
+          <li><b>EE 483</b>Digital Signal Processing</li>
+          <li><b>PHYS 126</b>AI and Quantum Computing</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Edinburgh · 2025–26</h3>
+        <ul>
+          <li>Analogue Circuits 2</li><li>Microelectronics 2</li><li>Digital System Design</li><li>Power Engineering 2</li><li>Sensor Networks &amp; Data Analysis</li><li>Engineering Mathematics 2A &amp; 2B</li><li>Informatics 1: Cognitive Science</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block stage bleed" id="journey" aria-labelledby="j-h">
+  <div class="wrap">
+    <div class="head rise"><h2 id="j-h">From 13 to now.</h2></div>
+    <ol class="timeline" reversed>
+      <li class="rise"><span class="yr">2026</span><span><b>Visiting student at USC Viterbi</b><span class="d">Electrical &amp; Computer Engineering, Los Angeles, for 2026–27.</span></span></li>
+      <li class="rise"><span class="yr">2026</span><span><b>Jane Street First-Year Trading &amp; Technology Program</b><span class="d">1 of 75 selected across EMEA.</span></span></li>
+      <li class="rise"><span class="yr">2025</span><span><b>1st place at AdaHack, honourable mention at DurHack</b><span class="d">An accessibility checker and a data-science forecast.</span></span></li>
+      <li class="rise"><span class="yr">2025</span><span><b>The University of Edinburgh</b><span class="d">MEng Electronics &amp; Electrical Engineering, direct entry to second year, on a PETRONAS full merit scholarship (top 1.5% of 10,000+ applicants). Joined HYPED and Raidō.</span></span></li>
+      <li class="rise"><span class="yr">2025</span><span><b>Software engineering intern at RICE International</b><span class="d">Top 5 finalist the same year for the Women in Tech APAC Aspiring Teen Award.</span></span></li>
+      <li class="rise"><span class="yr">2024</span><span><b>Technical intern at Chumbaka</b><span class="d">Automated reporting and mentored 30+ young makers.</span></span></li>
+      <li class="rise"><span class="yr">2022</span><span><b>Gold, GirlsCode Mobile Apps Hackathon</b><span class="d">State level, with Spinector 3.0. Silver at the Sarawak Mobile Apps Hackathon the same year.</span></span></li>
+      <li class="rise"><span class="yr">2020</span><span><b>Silver, Young Innovators Challenge</b><span class="d">National level, with the first Spinector.</span></span></li>
+      <li class="rise"><span class="yr">2019</span><span><b>Gold, Young Innovators Challenge</b><span class="d">State level, with Accio, our automatic stock counter. Co-founded my school's first digital maker club.</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="block" id="skills" aria-labelledby="s-h">
+  <div class="wrap">
+    <div class="head rise"><h2 id="s-h">Toolkit.</h2></div>
+    <div class="skills rise">
+      <div><h3>Hardware</h3><ul><li>PCB design <span class="k">Altium, EasyEDA</span></li><li>LTspice simulation</li><li>Analogue design &amp; op-amps</li><li>I²C, CAN, SPI</li><li>STM32 &amp; Arduino</li><li>Signal processing</li><li>Oscilloscope, FRA</li></ul></div>
+      <div><h3>Programming</h3><ul><li>C <span class="k">STM32 firmware; formally assessed</span></li><li>C++ <span class="k">Arduino</span></li><li>Python <span class="k">Pandas, Polars, NumPy, SciPy, FastAPI, LangChain</span></li><li>JavaScript, HTML, CSS</li><li>MATLAB</li></ul></div>
+      <div><h3>AI &amp; data</h3><ul><li>MCP servers <span class="k">Python SDK 2.x</span></li><li>RAG <span class="k">ChromaDB, Ollama, LangChain</span></li><li>Signal processing &amp; FFT</li><li>Bayesian inference</li><li>Matplotlib</li></ul></div>
+      <div><h3>Tools</h3><ul><li>Git &amp; GitHub</li><li>Docker, Linux</li><li>VS Code, Jupyter</li><li>SolidWorks</li><li>LaTeX</li><li>Workday Studio</li><li>Microsoft 365</li></ul></div>
+      <div><h3>Spoken</h3><ul><li>English</li><li>Mandarin</li><li>Cantonese</li><li>Malay</li></ul></div>
+    </div>
+    <div class="beyond">
+      <article class="rise music">
+        <span class="eyebrow">Music · MuseScore</span>
+        <h3>Piano arrangements, played by thousands.</h3>
+        <p>I arrange songs I love for solo piano, and sometimes for piano with violin or cello.</p>
+        <div class="stats">
+          <div><span class="n">30K+</span><span class="l">views</span></div>
+          <div><span class="n">900+</span><span class="l">saves</span></div>
+          <div><span class="n">4.5★</span><span class="l">rating, 188 votes on my top score</span></div>
+        </div>
+        <ul class="scores">
+          <li><b>He's a Pirate</b><span>Pirates of the Caribbean · piano &amp; violin · 2020</span><em>17.3K views</em></li>
+          <li><b>Let Somebody Go</b><span>Coldplay × Selena Gomez · solo piano · 2021</span><em>11.2K views</em></li>
+          <li><b>Mystery of Love</b><span>Sufjan Stevens · piano &amp; cello · 2024</span><em>1.3K views</em></li>
+          <li><b>Love Is Gone (Acoustic)</b><span>SLANDER ft. Dylan Matthew · solo piano · 2021</span><em>735 views</em></li>
+        </ul>
+        <p><a class="more-link" href="https://musescore.com/user/33566555">All my scores on MuseScore</a></p>
+      </article>
+      <article class="rise">
+        <span class="eyebrow">Community</span>
+        <h3>Getting girls into robotics</h3>
+        <p>Through ACCIO and our maker club, we encouraged younger girls at school to try programming and robotics.</p>
+      </article>
+      <article class="rise">
+        <span class="eyebrow">Off the clock</span>
+        <h3>10+ countries, 6 solo trips</h3>
+        <p>Travelling, photography and hunting down good cafés.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="stage bleed" id="contact">
+  <div class="contact wrap">
+    <h2 class="rise">Let's build something.</h2>
+    <p class="sub">Open to internships, collaborations and hackathon teams. In Los Angeles for 2026–27.</p>
+    <ul>
+      <li><a href="mailto:alisonteoh04@gmail.com">alisonteoh04@gmail.com</a></li>
+      <li><a href="https://github.com/al04t">GitHub</a></li>
+      <li><a href="https://devpost.com/al04t">Devpost</a></li>
+      <li><a href="https://www.linkedin.com/in/alison-teoh04">LinkedIn</a></li>
+      <li><span class="btnish"><span class="todo">CV</span></span></li>
+    </ul>
+  </div>
+  <footer class="wrap">© 2026 Alison Teoh</footer>
+</div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function fitCanvas(c) {
+    var r = c.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    c.width = Math.max(1, Math.round(r.width * d)); c.height = Math.max(1, Math.round(r.height * d));
+    var ctx = c.getContext('2d'); ctx.setTransform(d, 0, 0, d, 0, 0);
+    return { ctx: ctx, w: r.width, h: r.height };
+  }
+
+  /* ---------- filter maths: H(s) = 2 / ((s+1)(s^2+s+1)), s = j f/fc ---------- */
+  function gainDb(f) { var x = f / 1000; return 20 * Math.log10(2) - 10 * Math.log10(1 + Math.pow(x, 6)); }
+  function phaseDeg(f) { var x = f / 1000; return -(Math.atan(x) + Math.atan2(x, 1 - x * x)) * 180 / Math.PI; }
+  function fmtF(f) { return f < 1000 ? (f < 100 ? f.toFixed(1) : f.toFixed(0)) + ' Hz' : (f / 1000).toFixed(2) + ' kHz'; }
+  function signed(v, d) { var s = Math.abs(v).toFixed(d); return (v > 0.05 ? '+' : v < -0.05 ? '−' : '') + s; }
+
+  /* ---------- hero scope ---------- */
+  var scope = document.getElementById('scope'), sc, freq = 1.6, target = 1.6, t0 = 0, running = false;
+  function drawScope(t) {
+    var ctx = sc.ctx, w = sc.w, h = sc.h;
+    ctx.clearRect(0, 0, w, h);
+    ctx.strokeStyle = 'rgba(140,156,150,0.14)'; ctx.lineWidth = 1;
+    for (var gx = 0; gx <= w; gx += w / 12) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, h); ctx.stroke(); }
+    for (var gy = 0; gy <= h; gy += h / 4) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(w, gy); ctx.stroke(); }
+    freq += (target - freq) * 0.06;
+    var f = Math.pow(10, 1 + freq), amp = Math.pow(10, gainDb(f) / 20) / 2;
+    ctx.lineWidth = 2.5; ctx.strokeStyle = css('--stage-accent'); ctx.shadowColor = css('--stage-accent'); ctx.shadowBlur = 12;
+    ctx.beginPath();
+    var cycles = 2 + freq * 1.4, ph = t * 0.0012;
+    for (var i = 0; i <= w; i += 2) {
+      var y = h / 2 - Math.sin((i / w) * cycles * Math.PI * 2 - ph * 3) * amp * h * 0.38;
+      i ? ctx.lineTo(i, y) : ctx.moveTo(i, y);
+    }
+    ctx.stroke(); ctx.shadowBlur = 0;
+    ctx.fillStyle = css('--stage-muted'); ctx.font = '11px ' + css('--mono');
+    ctx.fillText(fmtF(f) + '   ' + signed(gainDb(f), 1) + ' dB', 8, 16);
+  }
+  function loop(t) { if (!running) return; drawScope(t - t0); requestAnimationFrame(loop); }
+  function startScope() { sc = fitCanvas(scope); if (reduce) { drawScope(0); return; } if (!running) { running = true; requestAnimationFrame(loop); } }
+  scope.addEventListener('pointermove', function (e) { var r = scope.getBoundingClientRect(); target = 3 * Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)); if (reduce) drawScope(0); });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) startScope(); else running = false; }); }).observe(scope);
+  } else startScope();
+
+  /* ---------- sweep ---------- */
+  var NS = 'http://www.w3.org/2000/svg', svg = document.getElementById('bode');
+  var X0 = 46, X1 = 430, Y0 = 12, Y1 = 218;
+  function bx(lf) { return X0 + (lf - 1) / 3 * (X1 - X0); }
+  function by(db) { return Y0 + (10 - db) / 70 * (Y1 - Y0); }
+  function el(tag, a, txt) { var n = document.createElementNS(NS, tag); for (var k in a) n.setAttribute(k, a[k]); if (txt) n.textContent = txt; return n; }
+  var gGrid = svg.querySelector('.grid'), gAxis = svg.querySelector('.axis'), names = ['', '10 Hz', '100 Hz', '1 kHz', '10 kHz'];
+  for (var d = 1; d <= 4; d++) { gGrid.appendChild(el('line', { x1: bx(d), x2: bx(d), y1: Y0, y2: Y1 })); gAxis.appendChild(el('text', { x: bx(d), y: Y1 + 18, 'text-anchor': d === 1 ? 'start' : d === 4 ? 'end' : 'middle' }, names[d])); }
+  for (var db = 10; db >= -60; db -= 10) { gGrid.appendChild(el('line', { x1: X0, x2: X1, y1: by(db), y2: by(db) })); gAxis.appendChild(el('text', { x: X0 - 7, y: by(db) + 4, 'text-anchor': 'end' }, signed(db, 0))); }
+  var pts = [];
+  for (var i = 0; i <= 300; i++) { var lf = 1 + 3 * i / 300; pts.push((i ? 'L' : 'M') + bx(lf).toFixed(1) + ' ' + by(Math.max(gainDb(Math.pow(10, lf)), -60)).toFixed(1)); }
+  svg.querySelector('.trace').setAttribute('d', pts.join(''));
+  var cut = svg.querySelector('.cut');
+  cut.appendChild(el('line', { x1: bx(3), x2: bx(3), y1: Y0, y2: Y1 }));
+  cut.appendChild(el('text', { x: bx(3) + 6, y: Y0 + 12 }, '−3 dB @ 1 kHz'));
+  var probeLine = svg.querySelector('.probe line'), probeDot = svg.querySelector('.probe circle');
+  var rf = document.getElementById('rf'), rg = document.getElementById('rg'), rp = document.getElementById('rp');
+  var steps = document.querySelectorAll('.steps li'), slider = document.getElementById('fslider');
+  var waves = document.getElementById('waves'), wv, waveT = 0;
+
+  function drawWaves(f) {
+    if (!wv) wv = fitCanvas(waves);
+    var ctx = wv.ctx, w = wv.w, h = wv.h, lin = Math.pow(10, gainDb(f) / 20), phi = phaseDeg(f) * Math.PI / 180, unit = h * 0.2;
+    ctx.clearRect(0, 0, w, h);
+    ctx.strokeStyle = css('--line'); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, h / 2); ctx.lineTo(w, h / 2); ctx.stroke();
+    function trace(a, p, col, lw) {
+      ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.beginPath();
+      for (var x = 0; x <= w; x += 2) { var y = h / 2 - Math.sin((x / w) * 3 * Math.PI * 2 + p - waveT) * a; x ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+      ctx.stroke();
+    }
+    trace(unit, 0, css('--muted'), 1.5);
+    trace(unit * lin, phi, css('--accent'), 2.5);
+  }
+  var lastLf = 1;
+  function setSweep(p) {
+    p = Math.min(1, Math.max(0, p));
+    var lf = 1 + 3 * p, f = Math.pow(10, lf), g = gainDb(f);
+    lastLf = lf;
+    probeDot.setAttribute('cx', bx(lf)); probeDot.setAttribute('cy', by(Math.max(g, -60)));
+    probeLine.setAttribute('x1', bx(lf)); probeLine.setAttribute('x2', bx(lf)); probeLine.setAttribute('y1', Y0); probeLine.setAttribute('y2', Y1);
+    rf.textContent = fmtF(f); rg.textContent = signed(g, 1) + ' dB'; rp.textContent = signed(phaseDeg(f), 0) + '°';
+    var s = lf < 2.85 ? 0 : lf < 3.2 ? 1 : 2;
+    steps.forEach(function (li) { li.classList.toggle('on', +li.dataset.s === s); });
+    slider.value = Math.round(p * 1000);
+    drawWaves(f);
+  }
+  var sweep = document.getElementById('sweep'), pinned = function () { return getComputedStyle(sweep.querySelector('.sweep-pin')).position === 'sticky'; };
+  function onScroll() {
+    if (!pinned()) return;
+    var r = sweep.getBoundingClientRect(), span = sweep.offsetHeight - window.innerHeight;
+    setSweep(span > 0 ? -r.top / span : 0);
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; onScroll(); }); } }, { passive: true });
+  slider.addEventListener('input', function () { setSweep(slider.value / 1000); });
+  window.addEventListener('resize', function () { wv = null; sc = scope && fitCanvas(scope); histFit = null; setSweep((lastLf - 1) / 3); drawHist(); if (reduce) drawScope(0); });
+  setSweep(0);
+  if (!reduce) (function anim() { waveT += 0.03; drawWaves(Math.pow(10, lastLf)); requestAnimationFrame(anim); })();
+
+  /* ---------- carousel ---------- */
+  var rail = document.getElementById('rail'), prev = document.getElementById('prev'), next = document.getElementById('next');
+  function step() { var c = rail.querySelector('.card:not([hidden])'); return c ? c.offsetWidth + 20 : 300; }
+  function ends() { prev.disabled = rail.scrollLeft < 8; next.disabled = rail.scrollLeft + rail.clientWidth > rail.scrollWidth - 8; }
+  prev.addEventListener('click', function () { rail.scrollBy({ left: -step(), behavior: reduce ? 'auto' : 'smooth' }); });
+  next.addEventListener('click', function () { rail.scrollBy({ left: step(), behavior: reduce ? 'auto' : 'smooth' }); });
+  rail.addEventListener('scroll', ends, { passive: true }); ends();
+  var chips = document.querySelectorAll('.chip');
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var f = chip.dataset.filter;
+      chips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+      rail.querySelectorAll('.card').forEach(function (card) { card.hidden = !(f === 'all' || card.dataset.tags.split(' ').indexOf(f) !== -1); });
+      rail.scrollLeft = 0; ends();
+    });
+  });
+  document.querySelectorAll('[data-open]').forEach(function (b) {
+    b.addEventListener('click', function () { var d = document.getElementById(b.dataset.open); if (d.showModal) d.showModal(); else d.setAttribute('open', ''); });
+  });
+  document.querySelectorAll('dialog.detail').forEach(function (d) {
+    d.querySelector('.x').addEventListener('click', function () { d.close(); });
+    d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+    d.querySelectorAll('[data-close]').forEach(function (a) { a.addEventListener('click', function () { d.close(); }); });
+  });
+
+  /* ---------- Bayes demo ---------- */
+  var bias = 0.6, hidden, belief, history, flips, revealed;
+  var fillA = document.getElementById('fillA'), fillB = document.getElementById('fillB'), pA = document.getElementById('pA'), pB = document.getElementById('pB');
+  var flipsEl = document.getElementById('flips'), statusEl = document.getElementById('status'), hist = document.getElementById('hist'), histFit;
+  function newCoin() { hidden = Math.random() < 0.5 ? 'A' : 'B'; belief = { A: 0.5, B: 0.5 }; history = [0.5]; flips = []; revealed = false; render(); }
+  function flip() {
+    var r = Math.random() < (hidden === 'A' ? 0.5 : bias) ? 'H' : 'T';
+    var la = r === 'H' ? 0.5 : 0.5, lb = r === 'H' ? bias : 1 - bias;
+    var a = belief.A * la, b = belief.B * lb, t = a + b;
+    belief = { A: a / t, B: b / t }; flips.push(r); history.push(belief.B);
+  }
+  function drawHist() {
+    if (!histFit) histFit = fitCanvas(hist);
+    var ctx = histFit.ctx, w = histFit.w, h = histFit.h, n = Math.max(history.length - 1, 20);
+    ctx.clearRect(0, 0, w, h);
+    ctx.strokeStyle = css('--stage-line'); ctx.lineWidth = 1;
+    [0.05, 0.5, 0.95].forEach(function (v) { var y = 6 + (1 - v) * (h - 12); ctx.setLineDash(v === 0.5 ? [] : [4, 4]); ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); });
+    ctx.setLineDash([]);
+    ctx.fillStyle = css('--stage-muted'); ctx.font = '10px ' + css('--mono');
+    ctx.fillText('95% sure B', 4, 6 + 0.05 * (h - 12) - 3); ctx.fillText('95% sure A', 4, 6 + 0.95 * (h - 12) + 11);
+    ctx.strokeStyle = css('--stage-pad'); ctx.lineWidth = 2.25; ctx.beginPath();
+    history.forEach(function (v, i) { var x = (i / n) * (w - 4) + 2, y = 6 + (1 - v) * (h - 12); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+    ctx.stroke();
+  }
+  function render() {
+    fillA.style.width = (belief.A * 100).toFixed(1) + '%'; fillB.style.width = (belief.B * 100).toFixed(1) + '%';
+    pA.textContent = Math.round(belief.A * 100) + '%'; pB.textContent = Math.round(belief.B * 100) + '%';
+    flipsEl.innerHTML = '';
+    flips.slice(-40).forEach(function (r) { var s = document.createElement('span'); s.className = r; s.textContent = r; flipsEl.appendChild(s); });
+    var lead = belief.B >= belief.A ? 'B' : 'A', conf = Math.max(belief.A, belief.B), heads = flips.filter(function (r) { return r === 'H'; }).length;
+    if (!flips.length) statusEl.textContent = 'No flips yet. Both coins are equally likely.';
+    else statusEl.innerHTML = flips.length + (flips.length === 1 ? ' flip' : ' flips') + ', ' + heads + ' heads. ' + (conf >= 0.95 ? '<b>' + Math.round(conf * 100) + '% sure it\'s Coin ' + lead + '.</b>' : 'Leaning Coin ' + lead + ' at ' + Math.round(conf * 100) + '%, not confident yet.');
+    if (revealed) statusEl.innerHTML += ' It was <b>Coin ' + hidden + '</b>.';
+    drawHist();
+  }
+  document.getElementById('flip1').addEventListener('click', function () { flip(); render(); });
+  document.getElementById('flip10').addEventListener('click', function () { for (var k = 0; k < 10; k++) flip(); render(); });
+  document.getElementById('reveal').addEventListener('click', function () { revealed = true; render(); });
+  document.getElementById('newcoin').addEventListener('click', newCoin);
+  var biasIn = document.getElementById('bias');
+  biasIn.addEventListener('input', function () { bias = biasIn.value / 100; document.getElementById('biasV').textContent = biasIn.value + '%'; document.getElementById('bLabel').textContent = biasIn.value + '% heads'; newCoin(); });
+  newCoin();
+  // open on a realistic state: a few example flips already made
+  for (var k = 0; k < 12; k++) flip(); render();
+
+  /* ---------- nav highlight ---------- */
+  var links = document.querySelectorAll('.nav ul a');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (en) {
+      en.forEach(function (x) { if (x.isIntersecting) links.forEach(function (a) { a.setAttribute('aria-current', a.getAttribute('href') === '#' + x.target.id ? 'true' : 'false'); }); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ['experience', 'work', 'bayes', 'coursework', 'journey', 'contact'].forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
